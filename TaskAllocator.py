@@ -64,6 +64,16 @@ def distribute_tasks():
         if extra_members > 0:
             extra_members -= 1
 
+    # Sikre at alle oppgaver blir tildelt, selv om det er flere oppgaver enn personer i gruppen
+    for answer in answers:
+        for group_id in range(1, num_groups + 1):
+            if answer not in groups[group_id]["tasks"]:
+                # Hvis gruppen mangler oppgaven, velg en tilfeldig person fra gruppen
+                eligible_members = groups[group_id]["members"] + list(groups[group_id]["tasks"].values())
+                if eligible_members:
+                    selected = random.choice(eligible_members)
+                    groups[group_id]["tasks"].setdefault(answer, selected)
+
 # Fordele oppgaver
 print("Fordeler oppgaver...")
 distribute_tasks()
@@ -79,9 +89,11 @@ pdf.cell(200, 10, txt="Oppgavefordeling", ln=True, align='C')
 for group_id, group in groups.items():
     pdf.cell(200, 10, txt=f"Gruppe {group_id}", ln=True, align='L')
 
-    # Legg til oppgaver
-    for task, name in group["tasks"].items():
-        pdf.cell(200, 10, txt=f"  {task}: {name}", ln=True, align='L')
+    # Sorter oppgaver og endre "Answer" til "Question"
+    sorted_tasks = sorted(group["tasks"].items(), key=lambda x: int(x[0].split()[1]))
+    for task, name in sorted_tasks:
+        question_label = task.replace("Answer", "Question")
+        pdf.cell(200, 10, txt=f"  {question_label}: {name}", ln=True, align='L')
 
     # Legg til andre medlemmer
     if group["members"]:
