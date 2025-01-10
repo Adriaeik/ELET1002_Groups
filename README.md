@@ -8,7 +8,8 @@ This Python script automates the allocation of tasks among groups and generates 
 
 1. **Task Allocation**:
    - Distributes tasks among groups based on availability.
-   - Ensures tasks are distributed evenly across groups, with flexibility for some members to have multiple tasks if necessary.
+   - Ensures tasks are distributed evenly across groups, adhering to fairness rules where no group exceeds the minimum number of tasks by more than one.
+   - Randomizes task assignments among eligible members for a fair distribution.
 
 2. **Group Balancing**:
    - Balances group sizes by assigning remaining members to groups.
@@ -16,7 +17,6 @@ This Python script automates the allocation of tasks among groups and generates 
 3. **PDF Report**:
    - Generates a PDF summarizing task assignments and group memberships.
    - Tasks are presented in a table with columns for question numbers and assigned members.
-   - Includes a "Lucky Fucker" section listing group members without specific task assignments.
 
 ---
 
@@ -26,6 +26,7 @@ This Python script automates the allocation of tasks among groups and generates 
 The following Python libraries are required:
 - `pandas`: For handling Excel files.
 - `fpdf`: For generating the PDF report.
+
 ---
 
 ## Input Format
@@ -64,8 +65,8 @@ The generated PDF includes:
 1. **Task Table**:
    - Lists questions (`Q.nr`) and the assigned participants for each group.
 
-2. **"Lucky Fucker" Section**:
-   - Lists participants in each group who were not assigned specific tasks.
+2. **Group Members**:
+   - Lists participants in each group and their tasks.
 
 Example Output:
 
@@ -79,9 +80,8 @@ Q.nr    Assigned To
 2       Bob Smith
 3       Charlie Davis
 
-No more tasks assigned
-Lucky Fucker 1    Bob Smith
-Lucky Fucker 2    Alice Johnson
+lucky fucker 1    Alice Johnson
+lucky fucker 2    Bob Smith
 ```
 
 ---
@@ -89,7 +89,4 @@ Lucky Fucker 2    Alice Johnson
 ## Customization
 
 - Modify `input_folder` to change the directory where the script looks for the Excel file.
-- Update PDF formatting in the `# PDF` section to customize the appearance.
-
----
-
+- Update PDF formatting in the `create_pdf` function to customize the appearance.

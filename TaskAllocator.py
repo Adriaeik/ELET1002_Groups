@@ -36,7 +36,8 @@ def distribute_tasks():
         random.shuffle(candidates)
 
         # Fordel kandidatar til gruppene for denne oppgåva
-        for group_id in range(1, num_groups + 1):
+        min_tasks = min(len(group["tasks"]) for group in groups.values())
+        for group_id in sorted(groups.keys(), key=lambda x: len(groups[x]["tasks"])):
             if candidates:
                 selected = candidates.pop(0)
                 groups[group_id]["tasks"].setdefault(answer, selected)
@@ -66,23 +67,14 @@ def distribute_tasks():
         if extra_members > 0:
             extra_members -= 1
 
-    # Tildel dummy-personar dersom nødvendig
+    # Fordel oppgåver der det ikkje er klare kandidatar
     for answer in answers:
-        for group_id in range(1, num_groups + 1):
+        for group_id in sorted(groups.keys(), key=lambda x: len(groups[x]["tasks"])):
             if answer not in groups[group_id]["tasks"]:
                 eligible_members = [member for member in groups[group_id]["members"] + list(groups[group_id]["tasks"].values()) if data.loc[data[full_name_col] == member, answer].values[0] == True]
                 if eligible_members:
                     selected = random.choice(eligible_members)
                     groups[group_id]["tasks"].setdefault(answer, selected)
-                else:
-                    groups[group_id]["tasks"].setdefault(answer, "Dummy")
-
-def clean_groups():
-    # Fjern dummy-personar før utskrift
-    for group_id in groups:
-        for task, assigned in list(groups[group_id]["tasks"].items()):
-            if assigned == "Dummy":
-                del groups[group_id]["tasks"][task]
 
 def create_pdf():
     pdf = FPDF()
@@ -109,7 +101,7 @@ def create_pdf():
 
         pdf.set_font("Arial", style="I", size=10)
         for idx, member in enumerate(group["members"], start=1):
-            pdf.cell(40, 10, txt=f"Member {idx}", border=1, align='C')
+            pdf.cell(40, 10, txt=f"lucky fucker {idx}", border=1, align='C')
             pdf.cell(100, 10, txt=member, border=1, align='L')
             pdf.ln()
 
@@ -119,5 +111,4 @@ def create_pdf():
 
 print("Fordeler oppgaver...")
 distribute_tasks()
-clean_groups()
 create_pdf()
