@@ -25,52 +25,52 @@ num_groups = int(input("Hvor mange grupper ønsker du? "))
 # Opprette grupper
 names = data[full_name_col].tolist()
 groups = {i: {"members": [], "tasks": {}} for i in range(1, num_groups + 1)}
+struck_tasks = []  # Liste for oppgaver som blir strøket
 
 def distribute_tasks():
     # Lag en liste over personer som kan presentere hver oppgave
     task_candidates = {answer: data.loc[data[answer] == True, full_name_col].tolist() for answer in answers}
 
-    # Start med oppgaven med høyest nummer (prioriter vanskeligste oppgaver)
+    # Prioriter oppgaver fra høyest til lavest
     for answer in reversed(answers):
         candidates = task_candidates[answer]
         random.shuffle(candidates)
-        num_groups_ = min(num_groups, len(candidates))  # Juster antall grupper basert på tilgjengelige kandidater
 
-        # Fordel kandidater til gruppene for denne oppgaven
-        for group_id in range(1, num_groups_ + 1):
+        # Hvis kun én kan svare, tildel til en spesifikk gruppe
+        if len(candidates) == 1:
+            selected = candidates.pop(0)
+            groups[1]["tasks"].setdefault(answer, selected)
+
+            # Fjern kandidaten fra andre oppgaver
+            for other_answer in answers:
+                if selected in task_candidates[other_answer]:
+                    task_candidates[other_answer].remove(selected)
+            continue
+
+        # Fordel oppgaven jevnt til grupper hvis flere kan svare
+        for group_id in range(1, num_groups + 1):
             if candidates:
                 selected = candidates.pop(0)
                 groups[group_id]["tasks"].setdefault(answer, selected)
 
-                # Fjern denne personen fra alle andre oppgaver
+                # Fjern kandidaten fra andre oppgaver
                 for other_answer in answers:
                     if selected in task_candidates[other_answer]:
                         task_candidates[other_answer].remove(selected)
 
-    # Fjern oppgaver uten tilgjengelige kandidater
+    # Håndter resterende oppgaver uten kandidater
     for answer in answers:
         if not any(answer in group["tasks"] for group in groups.values()):
-            print(f"Oppgave '{answer}' ble strøket på grunn av manglende kandidater.")
+            struck_tasks.append(answer)
 
-    # Finn personer som allerede er tildelt oppgaver
+    # Fordel gjenværende medlemmer på gruppene
     assigned_names = [name for group in groups.values() for name in group["tasks"].values()]
-
-    # Fordel resterende personer jevnt til grupper
     remaining_names = [name for name in names if name not in assigned_names]
     random.shuffle(remaining_names)
 
-    # Balanser gruppene uten å havne i evig løkke
-    target_size = len(names) // num_groups
-    extra_members = len(names) % num_groups
-
     for group_id in range(1, num_groups + 1):
-        while len(groups[group_id]["members"]) + len(groups[group_id]["tasks"]) < target_size + (1 if extra_members > 0 else 0):
-            if remaining_names:
-                groups[group_id]["members"].append(remaining_names.pop(0))
-            else:
-                break
-        if extra_members > 0:
-            extra_members -= 1
+        groups[group_id]["members"].extend(remaining_names[:len(remaining_names)//num_groups])
+        remaining_names = remaining_names[len(remaining_names)//num_groups:]
 
 print("Fordeler oppgaver...")
 distribute_tasks()
@@ -83,6 +83,15 @@ pdf.set_font("Arial", size=12)
 
 pdf.cell(200, 10, txt="Oppgavefordeling", ln=True, align='L')
 
+# Legg til strøkte oppgaver
+if struck_tasks:
+    pdf.set_font("Arial", style="B", size=12)
+    pdf.cell(0, 10, txt="Strøkte oppgaver", ln=True, align='L')
+    pdf.set_font("Arial", size=10)
+    for task in struck_tasks:
+        pdf.cell(0, 10, txt=task, ln=True, align='L')
+    pdf.ln()
+
 for group_id, group in groups.items():
     pdf.set_font("Arial", style="B", size=12)
     pdf.cell(0, 10, txt=f"Gruppe {group_id}", ln=True, align='L')
@@ -93,13 +102,7 @@ for group_id, group in groups.items():
     pdf.cell(100, 10, txt="Assigned To", border=1, align='L')
     pdf.ln()
 
-    def parse_question_number(task):
-        try:
-            return float(task.split()[1])  # Håndter både heltall og desimaltall
-        except ValueError:
-            return float('inf')  # Sett uforståelige verdier til en høy verdi for sortering
-
-    sorted_tasks = sorted(group["tasks"].items(), key=lambda x: parse_question_number(x[0]))
+    sorted_tasks = sorted(group["tasks"].items(), key=lambda x: answers.index(x[0]))
     for idx, (task, name) in enumerate(sorted_tasks, start=1):
         pdf.cell(40, 10, txt=str(idx), border=1, align='C')
         pdf.cell(100, 10, txt=name, border=1, align='L')
