@@ -36,10 +36,10 @@ def distribute_tasks():
         random.shuffle(candidates)
 
         # Fordel kandidatar til gruppene for denne oppgåva
-        min_tasks = min(len(group["tasks"]) for group in groups.values())
         for group_id in sorted(groups.keys(), key=lambda x: len(groups[x]["tasks"])):
-            if candidates:
-                selected = candidates.pop(0)
+            eligible_candidates = [candidate for candidate in candidates if all(candidate != groups[g]["tasks"].get(answer, None) for g in groups)]
+            if eligible_candidates:
+                selected = eligible_candidates.pop(0)
                 groups[group_id]["tasks"].setdefault(answer, selected)
 
                 # Fjern denne personen frå alle andre oppgåver
@@ -101,7 +101,7 @@ def create_pdf():
 
         pdf.set_font("Arial", style="I", size=10)
         for idx, member in enumerate(group["members"], start=1):
-            pdf.cell(40, 10, txt=f"lucky fucker {idx}", border=1, align='C')
+            pdf.cell(40, 10, txt=f"Lucky fucker {idx}", border=1, align='C')
             pdf.cell(100, 10, txt=member, border=1, align='L')
             pdf.ln()
 
