@@ -70,7 +70,7 @@ def distribute_tasks():
     for answer in answers:
         for group_id in range(1, num_groups + 1):
             if answer not in groups[group_id]["tasks"]:
-                eligible_members = groups[group_id]["members"] + list(groups[group_id]["tasks"].values())
+                eligible_members = [member for member in groups[group_id]["members"] + list(groups[group_id]["tasks"].values()) if data.loc[data[full_name_col] == member, answer].values[0] == True]
                 if eligible_members:
                     selected = random.choice(eligible_members)
                     groups[group_id]["tasks"].setdefault(answer, selected)
