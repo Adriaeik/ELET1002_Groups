@@ -74,30 +74,40 @@ def distribute_tasks():
                     selected = random.choice(eligible_members)
                     groups[group_id]["tasks"].setdefault(answer, selected)
 
-# Fordele oppgaver
 print("Fordeler oppgaver...")
 distribute_tasks()
 
-# Opprette PDF
+# PDF
 pdf = FPDF()
 pdf.set_auto_page_break(auto=True, margin=15)
 pdf.add_page()
 pdf.set_font("Arial", size=12)
 
-pdf.cell(200, 10, txt="Oppgavefordeling", ln=True, align='C')
+pdf.cell(200, 10, txt="Oppgavefordeling", ln=True, align='L')
 
+# Tabelloverskrifter
 for group_id, group in groups.items():
-    pdf.cell(200, 10, txt=f"Gruppe {group_id}", ln=True, align='L')
+    pdf.set_font("Arial", style="B", size=12)
+    pdf.cell(0, 10, txt=f"Gruppe {group_id}", ln=True, align='L')
 
-    # Sorter oppgaver og endre "Answer" til "Question"
+    pdf.set_font("Arial", size=10)
+    pdf.cell(40, 10, txt="Q.nr", border=1, align='C')
+    pdf.cell(100, 10, txt="Assigned To", border=1, align='L')
+    pdf.ln()
+
     sorted_tasks = sorted(group["tasks"].items(), key=lambda x: int(x[0].split()[1]))
-    for task, name in sorted_tasks:
-        question_label = task.replace("Answer", "Question")
-        pdf.cell(200, 10, txt=f"  {question_label}: {name}", ln=True, align='L')
+    for idx, (task, name) in enumerate(sorted_tasks, start=1):
+        pdf.cell(40, 10, txt=str(idx), border=1, align='C')
+        pdf.cell(100, 10, txt=name, border=1, align='L')
+        pdf.ln()
 
-    # Legg til andre medlemmer
-    if group["members"]:
-        pdf.cell(200, 10, txt=f"  Andre medlemmer: {', '.join(group['members'])}", ln=True, align='L')
+    # Adding a gender-neutral 'lucky person'
+    pdf.set_font("Arial", style="I", size=10)
+    # pdf.cell(0, 10, txt=f"No more tasks assigned", ln=True, align='L')
+    for idx, member in enumerate(group["members"], start=1):
+        pdf.cell(40, 10, txt=f"Lucky Fucker {idx}", border=1, align='C')
+        pdf.cell(100, 10, txt=member, border=1, align='L')
+        pdf.ln()
 
 # Lagre PDF
 output_file = "GroupAllocation.pdf"

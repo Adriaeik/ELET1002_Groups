@@ -1,1 +1,10 @@
 pip install pandas openpyxl fpdf
+
+Qnr. | asigned to|
+1| person
+2| ..
+3|
+#no more taskt
+lucky fucker 1|
+lucky fucker 2|
+osv..
