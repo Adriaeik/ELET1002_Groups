@@ -1,92 +1,68 @@
 # ELET1002 Group Task Allocator
 
-This Python script automates the allocation of tasks among groups and generates a well-formatted PDF summarizing the results. The script reads an Excel file containing participants' names and their task availability, then assigns tasks and balances group membership based on user-defined group sizes.
+Dette Python-skriptet fordeler oppgåver mellom grupper og genererer ein godt formatert PDF med oppsummering av resultatet.
 
 ---
 
-## Features
+## Viktig!
+1. Last ned data frå Blackboard med følgjande innstillingar (sjå bilete):
+   - Skiljeteikn: **Komma**
+   - Format på resultat: **Etter brukar**
+   - Forsøk: **Berre gyldige forsøk**
 
-1. **Task Allocation**:
-   - Distributes tasks among groups based on availability.
-   - Ensures tasks are distributed evenly across groups, adhering to fairness rules where no group exceeds the minimum number of tasks by more than one.
-   - Randomizes task assignments among eligible members for a fair distribution.
+2. Dersom Blackboard ikkje er på nynorsk:
+   - Endre `full_name_col` (linje 20) frå `"Fullt namn"` til `"Fullt navn"`.
 
-2. **Group Balancing**:
-   - Balances group sizes by assigning remaining members to groups.
-
-3. **PDF Report**:
-   - Generates a PDF summarizing task assignments and group memberships.
-   - Tasks are presented in a table with columns for question numbers and assigned members.
-
----
-
-## Requirements
-
-### Dependencies
-The following Python libraries are required:
-- `pandas`: For handling Excel files.
-- `fpdf`: For generating the PDF report.
+3. Dersom fila er på engelsk:
+   - Endre `full_name_col` til `"Full name"`.
+   - Endre `answers` (linje 21) til `[col for col in data.columns if col.lower().startswith("answer")]`.
+   - Endre `"Sann"` (linje 32) til `"True"`.
 
 ---
 
-## Input Format
+## Funksjonar
 
-The script expects **ONE** Excel file in the `TicksSheet` folder. The file must include:
+1. **Oppgåvefordeling**:
+   - Fordeler oppgåver blant grupper basert på tilgjengeligheit.
+   - Sikrar jamn fordeling der ingen gruppe har meir enn éi oppgåve meir enn dei andre.
 
-1. A column labeled `Full Name`, containing the names of participants.
-2. Columns labeled `Answer 1`, `Answer 2`, ..., `Answer n`, indicating task availability (with `TRUE` or `FALSE` values).
+2. **Gruppebalansering**:
+   - Fordeler resterande deltakarar jevnt til gruppene.
 
-Example:
-
-| Full Name                | Answer 1 | Answer 2 | Answer 3 |
-|--------------------------|----------|----------|----------|
-| Alice Johnson            | TRUE     | FALSE    | TRUE     |
-| Bob Smith                | TRUE     | TRUE     | FALSE    |
-| Charlie Davis            | FALSE    | TRUE     | TRUE     |
+3. **PDF-generering**:
+   - Genererer ein PDF som oppsummerer oppgåvefordeling og gruppemedlemskap.
 
 ---
 
-## Usage
+## Krav
 
-1. Place the Excel file in the `TicksSheet` folder.
-2. Run the script:
+### Avhengigheiter
+- `pandas`: For å handtere datafilene.
+- `fpdf`: For å generere PDF-rapporten.
+
+---
+
+## Bruk
+
+1. Legg CSV-fila i prosjektmappa.
+2. Kjør skriptet:
    ```bash
    python TaskAllocator.py
    ```
-3. Enter the number of groups when prompted.
-4. The script will generate a PDF named `GroupAllocation.pdf` in the current directory.
+3. Oppgi ønskja tal på grupper når du blir spurt.
+4. PDF-en `GroupAllocation.pdf` blir lagra i mappa.
 
 ---
 
-## Output
+## Input-format
 
-The generated PDF includes:
+Fila må innehalde følgjande kolonnar:
+1. Ein kolonne med namn (`Fullt namn`, `Fullt navn`, eller `Full name`).
+2. Kolonnar for oppgåvesvar (`Svar 1`, `Answer 1`, osv.) med verdiar `Sann`/`Usann` eller `True`/`False`.
 
-1. **Task Table**:
-   - Lists questions (`Q.nr`) and the assigned participants for each group.
+Eksempel:
 
-2. **Group Members**:
-   - Lists participants in each group and their tasks.
-
-Example Output:
-
-```
-Oppgavefordeling
-
-Gruppe 1
-
-Q.nr    Assigned To
-1       Alice Johnson
-2       Bob Smith
-3       Charlie Davis
-
-lucky fucker 1    Alice Johnson
-lucky fucker 2    Bob Smith
-```
-
----
-
-## Customization
-
-- Modify `input_folder` to change the directory where the script looks for the Excel file.
-- Update PDF formatting in the `create_pdf` function to customize the appearance.
+| Fullt namn        | Svar 1  | Svar 2  | Svar 3  |
+|-------------------|---------|---------|---------|
+| Ola Nordmann      | Sann    | Usann   | Sann    |
+| Kari Nordmann     | Sann    | Sann    | Usann   |
