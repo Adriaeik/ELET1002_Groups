@@ -5,19 +5,20 @@ import os
 
 # Funksjon for å finne den nyeste filen i mappen
 def get_latest_file(folder):
-    files = [f for f in os.listdir(folder) if f.endswith('.xlsx')]
-    paths = [os.path.join(folder, f) for f in files]
-    return max(paths, key=os.path.getctime)
+    files = [f for f in os.listdir(folder) if f.endswith('.csv')]
+    if not files:
+        raise FileNotFoundError(f"Ingen CSV-filer funnet i {folder}")
+    return os.path.join(folder, files[0])
 
-# Konstanter
+# Laste inn CSV-fila frå TicksSheet-mappa
 input_folder = "TicksSheet"
-input_file = get_latest_file(input_folder)
+file_path = get_latest_file(input_folder)
 
-data = pd.read_excel(input_file)
+data = pd.read_csv(file_path, sep=",", encoding="utf-8")
 
-# Konvertere kolonneoverskrifter og sjekke data
-full_name_col = "Full Name"
-answers = [col for col in data.columns if col.startswith("Answer")]
+# Definere relevante kolonner
+full_name_col = "Fullt namn"
+answers = [col for col in data.columns if col.lower().startswith("svar")]
 
 # Be brukeren om antall grupper
 num_groups = int(input("Hvor mange grupper ønsker du? "))
@@ -28,7 +29,7 @@ groups = {i: {"members": [], "tasks": {}} for i in range(1, num_groups + 1)}
 
 def distribute_tasks():
     # Lag ein liste over personar som kan presentere kvar oppgåve
-    task_candidates = {answer: data.loc[data[answer] == True, full_name_col].tolist() for answer in answers}
+    task_candidates = {answer: data.loc[data[answer] == "Sann", full_name_col].tolist() for answer in answers}
 
     # Start med oppgåva med høgast nummer (prioriter vanskelegaste oppgåver)
     for answer in reversed(answers):
@@ -54,7 +55,6 @@ def distribute_tasks():
     remaining_names = [name for name in names if name not in assigned_names]
     random.shuffle(remaining_names)
 
-    # Balanser gruppene
     target_size = len(names) // num_groups
     extra_members = len(names) % num_groups
 
@@ -71,7 +71,7 @@ def distribute_tasks():
     for answer in answers:
         for group_id in sorted(groups.keys(), key=lambda x: len(groups[x]["tasks"])):
             if answer not in groups[group_id]["tasks"]:
-                eligible_members = [member for member in groups[group_id]["members"] + list(groups[group_id]["tasks"].values()) if data.loc[data[full_name_col] == member, answer].values[0] == True]
+                eligible_members = [member for member in groups[group_id]["members"] + list(groups[group_id]["tasks"].values()) if data.loc[data[full_name_col] == member, answer].values[0] == "Sann"]
                 if eligible_members:
                     selected = random.choice(eligible_members)
                     groups[group_id]["tasks"].setdefault(answer, selected)
@@ -89,13 +89,13 @@ def create_pdf():
         pdf.cell(0, 10, txt=f"Gruppe {group_id}", ln=True, align='L')
 
         pdf.set_font("Arial", size=10)
-        pdf.cell(40, 10, txt="Q.nr", border=1, align='C')
-        pdf.cell(100, 10, txt="Assigned To", border=1, align='L')
+        pdf.cell(40, 10, txt="Spørsmål nr", border=1, align='C')
+        pdf.cell(100, 10, txt="Tildelt til", border=1, align='L')
         pdf.ln()
 
-        sorted_tasks = sorted(group["tasks"].items(), key=lambda x: float(x[0].split()[1]))
+        sorted_tasks = sorted(group["tasks"].items(), key=lambda x: x[0])
         for idx, (task, name) in enumerate(sorted_tasks, start=1):
-            pdf.cell(40, 10, txt=str(idx), border=1, align='C')
+            pdf.cell(40, 10, txt=task, border=1, align='C')
             pdf.cell(100, 10, txt=name, border=1, align='L')
             pdf.ln()
 
