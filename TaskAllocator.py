@@ -17,7 +17,7 @@ file_path = get_latest_file(input_folder)
 data = pd.read_csv(file_path, sep=",", encoding="utf-8")
 
 # Definere relevante kolonner
-full_name_col = "Fullt namn"
+full_name_col = "Fullt namn" 
 answers = [col for col in data.columns if col.lower().startswith("svar")]
 
 # Be brukeren om antall grupper
