@@ -1,7 +1,9 @@
 # ELET1002 Group Task Allocator
 
 Dette Python-skriptet fordeler oppgåver mellom grupper og genererer to PDF-ar med oversikt over resultatet.
+## Fordi ingen har tolmodighet - ihvertfall les ditta
 
+Lag ein mappe kalla `TicksSheet` og plasser `csv` fila lasta ned frå blackboard i den. 
 ---
 
 ## Viktig!
