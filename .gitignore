@@ -1,0 +1,20 @@
+# ==== Datafiler ====
+# Ignorer alle Blackboard-eksportar med studentdata
+TicksSheet/*.csv
+
+# ==== Genererte PDF-ar ====
+# Oppgåvefordeling og gruppeoversikt
+GroupAllocation.pdf
+GroupOverview.pdf
+
+# ==== Python-artefaktar ====
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ==== Midlertidige og systemfiler ====
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
