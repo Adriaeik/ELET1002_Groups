@@ -6,6 +6,7 @@ TicksSheet/*.csv
 # Oppgåvefordeling og gruppeoversikt
 GroupAllocation.pdf
 GroupOverview.pdf
+notat.txt
 
 # ==== Python-artefaktar ====
 __pycache__/
