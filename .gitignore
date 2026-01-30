@@ -14,9 +14,4 @@ __pycache__/
 *.pyo
 *.pyd
 
-# ==== Midlertidige og systemfiler ====
-*.log
-*.tmp
-.DS_Store
-Thumbs.db
 SLT/

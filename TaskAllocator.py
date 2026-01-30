@@ -63,25 +63,47 @@ def find_answer_columns(data):
     return dict(sorted(answers.items()))
 
 
+def extract_group_number(val):
+    """Trekk ut gruppenummer frå ein verdi (tal eller streng som 'SLT gr. 7 - Namn')"""
+    val_str = str(val).strip()
+    
+    # Ignorer verdiar med komma (t.d. "1,2,3,4,5" - ugyldig multi-val)
+    if ',' in val_str:
+        return None
+    
+    # Prøv først som rein tal
+    try:
+        return int(float(val_str))
+    except ValueError:
+        pass
+    
+    # Søk etter tal i strengen (t.d. "SLT gr. 7 - Kretsmesterne")
+    match = re.search(r'\b(\d+)\b', val_str)
+    if match:
+        return int(match.group(1))
+    
+    return None
+
+
 def get_groups(data, group_col):
     """Hent ut gyldige gruppenummer frå data"""
     groups = set()
     for val in data[group_col].dropna().unique():
-        val_str = str(val).strip()
-        if ',' in val_str:
-            continue  # Hopp over ugyldige svar
-        try:
-            groups.add(int(float(val_str)))
-        except ValueError:
-            continue
+        group_num = extract_group_number(val)
+        if group_num is not None:
+            groups.add(group_num)
     return sorted(groups)
 
 
 def filter_by_group(data, group_col, group_num):
     """Filtrer data til berre den valde gruppa"""
-    return data[data[group_col].apply(
-        lambda x: str(x).strip() == str(group_num) if pd.notna(x) else False
-    )].copy()
+    def matches_group(val):
+        if pd.isna(val):
+            return False
+        extracted = extract_group_number(val)
+        return extracted == group_num
+    
+    return data[data[group_col].apply(matches_group)].copy()
 
 
 def calculate_num_subgroups(num_students):
@@ -278,7 +300,9 @@ def main():
     slt_num = input("\nKva SLT-nummer er dette? ")
     
     # Opprett hovudmappe
-    base_folder = f"SLT/SLT{slt_num}"
+    slt_root = "SLT"
+    os.makedirs(slt_root, exist_ok=True)
+    base_folder = os.path.join(slt_root, f"SLT{slt_num}")
     os.makedirs(base_folder, exist_ok=True)
     
     print()
