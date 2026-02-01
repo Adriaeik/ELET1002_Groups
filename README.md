@@ -1,100 +1,111 @@
+
 # ELET1002 Group Task Allocator
 
-Dette Python-skriptet fordeler oppgåver mellom grupper og genererer to PDF-ar med oversikt over resultatet.
+Dette Python-skriptet fordeler oppgåver mellom grupper basert på Canvas Quiz-svar og genererer PDF-ar med oversikt over resultatet.
+
 ## Fordi ingen har tolmodighet - ihvertfall les ditta
 
-Lag ein mappe kalla `TicksSheet` og plasser `csv` fila lasta ned frå blackboard i den. 
----
+1. Last ned Quiz-rapport frå Canvas med **Student Analysis Report** (CSV-format)
+2. Lag ei mappe kalla `TicksSheet` og plasser CSV-fila der
+3. Køyr skriptet og oppgi SLT-nummeret
 
-## Viktig!
+## Nedlasting frå Canvas
 
-1. Last ned data frå Blackboard med følgjande innstillingar (sjå bilete):
-
-   * Skiljeteikn: **Komma**
-   * Format på resultat: **Etter brukar**
-   * Forsøk: **Berre gyldige forsøk**
-
-2. Dersom Blackboard ikkje er på nynorsk:
-
-   * Endre `full_name_col` (linje 20) frå `"Fullt namn"` til `"Fullt navn"`.
-
-3. Dersom fila er på engelsk:
-
-   * Endre `full_name_col` til `"Full name"`.
-   * Endre `answers` (linje 21) til
-
-     ```python
-     [col for col in data.columns if col.lower().startswith("answer")]
-     ```
-   * Endre `"Sann"` (linje 32) til `"True"`.
-
----
+1. Gå til quizen i Canvas
+2. Klikk på **Quiz Statistics** → **Student Analysis**
+3. Last ned CSV-fila
+4. Legg fila i `TicksSheet/`-mappa
 
 ## Funksjonar
 
-1. **Oppgåvefordeling**
+### 1. Oppgåvefordeling
 
-   * Fordeler oppgåver mellom grupper basert på kven som har svart *Sann* på kvar oppgåve.
-   * Prioriterer rettferdig fordeling slik at kvar oppgåve blir tildelt éin kvalifisert person per gruppe (der det er mogleg).
-   * Ingen får ei oppgåve dei ikkje har svart *Sann* på.
+* Fordeler oppgåver mellom subgrupper basert på kven som har svart **Ja** på kvar oppgåve
+* Prioriterer rettferdig fordeling slik at kvar oppgåve blir tildelt éin kvalifisert person per subgruppe
+* Ingen får ei oppgåve dei ikkje har svart Ja på
+* Handterer automatisk fleire forsøk (brukar siste gyldige forsøk)
 
-2. **Gruppebalansering (oppdatert)**
+### 2. Subgruppebalansering
 
-   * Alle deltakarar utan oppgåve blir no fordelte **jamnt** mellom gruppene.
-   * Skriptet reknar automatisk ut total gruppestorleik (oppgåvepersonar + vanlege medlemmar) og legg nye deltakarar i den minste gruppa først.
-   * Dermed får alle grupper tilnærma lik storleik uansett kor mange oppgåver som blei tildelt.
+* Studentar blir fordelte i subgrupper (mål: ~6 per subgruppe, maks 4 subgrupper)
+* Alle deltakarar utan oppgåve blir fordelte jamnt mellom subgruppene
+* Dermed får alle subgrupper tilnærma lik storleik
 
-3. **PDF-generering (utvida)**
-   Skriptet lagar no to ulike PDF-ar:
+### 3. PDF-generering
 
-   * `GroupAllocation.pdf` – viser full oversikt over kven som har fått kva oppgåve.
-   * `GroupOverview.pdf` – viser berre gruppemedlemmane, **utan å avsløre oppgåvefordeling**.
-     Denne kan delast med studentane utan å røpe kven som presenterer.
+Skriptet lagar følgjande struktur:
 
----
+```
+SLT/
+└── SLT<nr>/
+    ├── gruppe1/
+    │   ├── TaskAllocation.pdf   # Alle subgrupper med oppgåvefordeling
+    │   └── GroupOverview.pdf    # Alle subgrupper, berre medlemsliste
+    ├── gruppe2/
+    │   ├── TaskAllocation.pdf
+    │   └── GroupOverview.pdf
+    ...
+    └── gruppe10/
+        ├── TaskAllocation.pdf
+        └── GroupOverview.pdf
+```
+
+Legg til `SLT/` i `.gitignore` for å unngå å pushe genererte filer.
+
+* `TaskAllocation.pdf` – viser kven som har fått kva oppgåve for alle subgrupper
+* `GroupOverview.pdf` – viser berre medlemmar, kan delast utan å avsløre oppgåver
 
 ## Krav
 
 ### Avhengigheiter
 
-* `pandas` – for å lese og handtere CSV-data.
-* `fpdf` – for å generere PDF-filene.
+* `pandas` – for å lese og handtere CSV-data
+* `reportlab` – for å generere PDF-filene
 
 Installer med:
 
 ```bash
-pip install pandas fpdf
+pip install -r requirements.txt
 ```
-
----
 
 ## Bruk
 
-1. Legg CSV-fila frå Blackboard i mappa `TicksSheet/`.
-2. Kjør skriptet:
+1. Legg CSV-fila frå Canvas i mappa `TicksSheet/`
+2. Køyr skriptet:
 
-   ```bash
-   python TaskAllocator.py
-   ```
-3. Oppgi ønskja tal på grupper når du blir spurt.
-4. To PDF-ar blir lagra:
+```bash
+python TaskAllocator.py
+```
 
-   * `GroupAllocation.pdf` (full versjon)
-   * `GroupOverview.pdf` (anonym versjon)
+3. Oppgi SLT-nummeret når du blir spurt
+4. PDF-ar blir lagra i `SLT<nr>/`-mappa
 
----
+## Eksempel
 
-## Input-format
+```
+$ python TaskAllocator.py
+Lastar inn: TicksSheet/Quiz_Student_Analysis_Report.csv
+Fann 6 oppgåver: [1, 2, 3, 4, 5, 6]
+Fann 10 grupper i data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-Fila må innehalde:
+Kva SLT-nummer er dette? 1
 
-1. Éin kolonne med namn (`Fullt namn`, `Fullt navn`, eller `Full name`).
-2. Éi eller fleire kolonnar med oppgåvesvar (`Svar 1`, `Answer 1`, osv.) med verdiar `Sann`/`Usann` eller `True`/`False`.
+Prosesserer gruppe 1: 5 studentar → 1 subgruppe(r)
+Prosesserer gruppe 2: 7 studentar → 1 subgruppe(r)
+Prosesserer gruppe 3: 6 studentar → 1 subgruppe(r)
+Prosesserer gruppe 4: 2 studentar → 1 subgruppe(r)
+Prosesserer gruppe 5: 8 studentar → 1 subgruppe(r)
+...
 
-Eksempel:
+Ferdig! Grupper lagra i SLT/SLT1/
+```
 
-| Fullt namn    | Svar 1 | Svar 2 | Svar 3 |
-| ------------- | ------ | ------ | ------ |
-| Ola Nordmann  | Sann   | Usann  | Sann   |
-| Kari Nordmann | Sann   | Sann   | Usann  |
+## Feilsøking
 
+**"Ingen CSV-filer funnet"**
+
+* Sjekk at du har laga `TicksSheet/`-mappa og lagt CSV-fila der
+
+**"Fann ikkje gruppekolonna"**
+
+* Sjekk at quizen har eit spørsmål om SLT-gruppe
