@@ -1,1 +1,2 @@
-pip install pandas openpyxl fpdf
+pandas>=1.5.0
+reportlab>=4.0.0

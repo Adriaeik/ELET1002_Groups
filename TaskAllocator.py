@@ -22,7 +22,7 @@ except:
 
 # Konfigurasjon
 TARGET_SUBGROUP_SIZE = 6  # Mål: 6 personar per subgruppe
-MAX_SUBGROUPS = 3         # Maks 4 subgrupper per gruppe
+MAX_SUBGROUPS = 3         # Maks 3 subgrupper per gruppe
 
 
 def get_latest_file(folder):
