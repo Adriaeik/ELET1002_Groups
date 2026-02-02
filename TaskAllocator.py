@@ -39,7 +39,7 @@ def load_data(file_path):
     
     # Sorter etter attempt (fallande) og behald høgaste attempt per student
     data = data.sort_values('attempt', ascending=False)
-    data = data.drop_duplicates(subset=['id'], keep='first')
+    # data = data.drop_duplicates(subset=['id'], keep='first')
     
     return data
 
