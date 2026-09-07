@@ -16,6 +16,18 @@ Dette Python-skriptet fordeler oppgåver mellom grupper basert på Canvas Quiz-s
 3. Last ned CSV-fila
 4. Legg fila i `TicksSheet/`-mappa
 
+## Format på Canvas-rapporten
+
+Skriptet kjenner att begge formata automatisk:
+
+| | Gammalt format | Nytt format |
+| --- | --- | --- |
+| Gruppe | eige quiz-spørsmål (`Hvilken SLT-gruppe tilhører du?`) | Canvas-seksjonen, t.d. `TET4100-26H-9 :: 5 - The Mighty Power Nappers` |
+| Oppgåvespørsmål | `... presentere oppgave 1` | `... present Task #1` |
+| Svar | `Ja` / `Nei` | `True` / `False` |
+
+Ligg det fleire CSV-ar i `TicksSheet/`, blir den nyaste fila brukt.
+
 ## Funksjonar
 
 ### 1. Oppgåvefordeling
@@ -37,6 +49,7 @@ Skriptet lagar følgjande struktur:
 
 ```
 SLT/
+├── SLT<nr>.zip              # Alle PDF-ane under samla i éi fil
 └── SLT<nr>/
     ├── gruppe1/
     │   ├── TaskAllocation.pdf   # Alle subgrupper med oppgåvefordeling
@@ -54,6 +67,8 @@ Legg til `SLT/` i `.gitignore` for å unngå å pushe genererte filer.
 
 * `TaskAllocation.pdf` – viser kven som har fått kva oppgåve for alle subgrupper
 * `GroupOverview.pdf` – viser berre medlemmar, kan delast utan å avsløre oppgåver
+* `SLT<nr>.zip` – alle PDF-ane frå alle gruppene, klar til opplasting/deling.
+  Blir laga på nytt for kvar køyring.
 
 ## Krav
 
@@ -98,6 +113,7 @@ Prosesserer gruppe 5: 8 studentar → 1 subgruppe(r)
 ...
 
 Ferdig! Grupper lagra i SLT/SLT1/
+Zip med 16 PDF-ar: SLT/SLT1.zip
 ```
 
 ## Feilsøking
@@ -108,4 +124,9 @@ Ferdig! Grupper lagra i SLT/SLT1/
 
 **"Fann ikkje gruppekolonna"**
 
-* Sjekk at quizen har eit spørsmål om SLT-gruppe
+* Sjekk at quizen har eit spørsmål om SLT-gruppe (gammalt format), eller at
+  `section`-kolonna har gruppenummer etter `::` (nytt format)
+
+**"Fann ingen oppgåvekolonner i CSV"**
+
+* Sjekk at spørsmåla heiter `... presentere oppgave <nr>` eller `... present Task #<nr>`

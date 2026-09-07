@@ -9,6 +9,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import os
 import re
+import zipfile
 
 # Registrer font med norsk støtte
 try:
@@ -24,18 +25,43 @@ except:
 TARGET_SUBGROUP_SIZE = 6  # Mål: 6 personar per subgruppe
 MAX_SUBGROUPS = 3         # Maks 3 subgrupper per gruppe
 
+# Verdiar som tyder "ja". Gammalt format svarte "Ja"/"Nei",
+# nytt format brukar avkryssing som Canvas eksporterer som True/False.
+YES_VALUES = {'ja', 'j', 'yes', 'y', 'true', 'sant', '1', '1.0'}
+
+# Gruppenummer i section-kolonna (nytt format), t.d.
+# "TET4100-26H-9 :: 5 - The Mighty Power Nappers" -> 5
+SECTION_GROUP_RE = re.compile(r'::\s*(?:slt\s*)?(?:gr\.?|gruppe|group)?\s*(\d+)', re.IGNORECASE)
+
+# Oppgåvekolonner: "presentere oppgave 1" (gammalt) / "present Task #1" (nytt)
+TASK_COL_RE = re.compile(r'present(?:ere)?\s+(?:oppgave|task)\s*#?\s*(\d+)', re.IGNORECASE)
+
+
+def is_yes(val):
+    """Sjekk om ein svarverdi tyder ja (True, "Ja", "Yes", ...)"""
+    if isinstance(val, bool):
+        return val
+    if pd.isna(val):
+        return False
+    return str(val).strip().lower() in YES_VALUES
+
 
 def get_latest_file(folder):
-    """Finn den nyaste CSV-fila i mappa"""
-    files = [f for f in os.listdir(folder) if f.endswith('.csv')]
+    """Finn den nyaste CSV-fila i mappa (etter endringstidspunkt).
+
+    Viktig når gamle rapportar ligg att i mappa - alfabetisk rekkjefølgje
+    ville plukka feil fil.
+    """
+    files = [os.path.join(folder, f) for f in os.listdir(folder)
+             if f.lower().endswith('.csv')]
     if not files:
         raise FileNotFoundError(f"Ingen CSV-filer funnet i {folder}")
-    return os.path.join(folder, files[0])
+    return max(files, key=os.path.getmtime)
 
 
 def load_data(file_path):
     """Last inn data og behald berre siste forsøk per student"""
-    data = pd.read_csv(file_path, sep=",", encoding="utf-8")
+    data = pd.read_csv(file_path, sep=",", encoding="utf-8-sig")
     
     # Sorter etter attempt (fallande) og behald høgaste attempt per student
     data = data.sort_values('attempt', ascending=False)
@@ -45,10 +71,23 @@ def load_data(file_path):
 
 
 def find_group_column(data):
-    """Finn kolonna som inneheld gruppenummer"""
+    """Finn kolonna som inneheld gruppetilhøyrsle.
+
+    Gammalt format: eit eige quiz-spørsmål om SLT-gruppe.
+    Nytt format: spørsmålet finst ikkje - gruppa ligg i Canvas-seksjonen,
+    t.d. "TET4100-26H-9 :: 5 - The Mighty Power Nappers".
+    """
     for col in data.columns:
         if 'hvilken slt-gruppe' in col.lower() or 'tilhører du' in col.lower():
             return col
+
+    if 'section' in data.columns:
+        has_group = data['section'].astype(str).apply(
+            lambda s: SECTION_GROUP_RE.search(s) is not None
+        )
+        if has_group.any():
+            return 'section'
+
     raise ValueError("Fann ikkje gruppekolonna i CSV")
 
 
@@ -56,7 +95,7 @@ def find_answer_columns(data):
     """Finn oppgåvekolonner. Returnerer dict med {oppgåvenummer: kolonnenamn}"""
     answers = {}
     for col in data.columns:
-        match = re.search(r'presentere oppgave (\d+)', col.lower())
+        match = TASK_COL_RE.search(str(col))
         if match:
             task_num = int(match.group(1))
             answers[task_num] = col
@@ -64,9 +103,22 @@ def find_answer_columns(data):
 
 
 def extract_group_number(val):
-    """Trekk ut gruppenummer frå ein verdi (tal eller streng som 'SLT gr. 7 - Namn')"""
+    """Trekk ut gruppenummer frå ein verdi.
+
+    Nytt format (section): "TET4100-26H-9 :: 5 - The Mighty Power Nappers, TET4100-26H" -> 5
+    Gammalt format:        "SLT gr. 7 - Kretsmesterne" -> 7
+    """
     val_str = str(val).strip()
-    
+
+    # Nytt format: ein student kan stå i fleire seksjonar (kommaseparert),
+    # men berre éi av dei er ei SLT-gruppe.
+    section_groups = {int(n) for n in SECTION_GROUP_RE.findall(val_str)}
+    if len(section_groups) == 1:
+        return section_groups.pop()
+    if section_groups or '::' in val_str:
+        # Fleire grupper, eller berre emneseksjonen utan gruppe
+        return None
+
     # Ignorer verdiar med komma (t.d. "1,2,3,4,5" - ugyldig multi-val)
     if ',' in val_str:
         return None
@@ -123,8 +175,7 @@ def is_willing(data, name, answer_col):
     row = data.loc[data['name'] == name, answer_col]
     if row.empty:
         return False
-    val = str(row.values[0]).strip().lower()
-    return val == 'ja'
+    return is_yes(row.values[0])
 
 
 def distribute_tasks(data, answers, num_subgroups):
@@ -138,10 +189,7 @@ def distribute_tasks(data, answers, num_subgroups):
     # Lag ei liste over personar som kan presentere kvar oppgåve
     task_candidates = {}
     for task_num, col in answers.items():
-        candidates = data.loc[
-            data[col].astype(str).str.strip().str.lower() == 'ja',
-            'name'
-        ].tolist()
+        candidates = data.loc[data[col].apply(is_yes), 'name'].tolist()
         task_candidates[task_num] = candidates
     
     # Start med oppgåva med høgast nummer (prioriter vanskelegaste oppgåver)
@@ -280,6 +328,32 @@ def create_group_overview_pdf(subgroups, output_path):
     doc.build(elements)
 
 
+def create_zip(base_folder, zip_path):
+    """Pakk alle PDF-ane under base_folder i ein zip.
+
+    Zip-fila blir lagd utanfor base_folder slik at ho ikkje pakkar seg sjølv.
+    Stiane i zipen er relative til mappa over, t.d. "SLT1/gruppe1/TaskAllocation.pdf".
+    """
+    root = os.path.dirname(os.path.abspath(base_folder))
+
+    pdfs = []
+    for folder, _, files in os.walk(base_folder):
+        for f in files:
+            if f.lower().endswith('.pdf'):
+                pdfs.append(os.path.join(folder, f))
+    pdfs.sort()
+
+    if not pdfs:
+        return 0
+
+    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
+        for pdf in pdfs:
+            arcname = os.path.relpath(pdf, root).replace(os.sep, '/')
+            zf.write(pdf, arcname)
+
+    return len(pdfs)
+
+
 def main():
     # Last inn data
     input_folder = "TicksSheet"
@@ -290,11 +364,23 @@ def main():
     group_col = find_group_column(data)
     answers = find_answer_columns(data)
     
+    if not answers:
+        raise ValueError("Fann ingen oppgåvekolonner i CSV")
+
+    kjelde = "section (nytt format)" if group_col == 'section' else "quiz-spørsmål (gammalt format)"
+    print(f"Gruppekjelde: {kjelde}")
     print(f"Fann {len(answers)} oppgåver: {list(answers.keys())}")
     
     # Finn alle grupper
     all_groups = get_groups(data, group_col)
     print(f"Fann {len(all_groups)} grupper i data: {all_groups}")
+
+    # Studentar som ikkje kan plasserast i noko gruppe (t.d. berre registrert
+    # på emnet). Eit forsøk utan gruppe tel ikkje viss eit anna forsøk har gruppe.
+    has_group = data[group_col].apply(lambda v: extract_group_number(v) is not None)
+    ungrouped = sorted(set(data.loc[~has_group, 'name']) - set(data.loc[has_group, 'name']))
+    if ungrouped:
+        print(f"Åtvaring: {len(ungrouped)} utan gruppe: {', '.join(ungrouped)}")
     
     # Spør om SLT-nummer (berre for mappenamn)
     slt_num = input("\nKva SLT-nummer er dette? ")
@@ -336,6 +422,14 @@ def main():
         create_group_overview_pdf(subgroups, overview_pdf)
     
     print(f"\nFerdig! Grupper lagra i {base_folder}/")
+
+    # Pakk alle PDF-ane i éi zip-fil
+    zip_path = f"{base_folder}.zip"
+    num_pdfs = create_zip(base_folder, zip_path)
+    if num_pdfs:
+        print(f"Zip med {num_pdfs} PDF-ar: {zip_path}")
+    else:
+        print("Åtvaring: fann ingen PDF-ar å pakke")
 
 
 if __name__ == "__main__":
