@@ -3,10 +3,10 @@
 
 Dette Python-skriptet fordeler oppgåver mellom grupper basert på Canvas Quiz-svar og genererer PDF-ar med oversikt over resultatet.
 
-## Fordi ingen har tolmodighet - ihvertfall les ditta
+## TL;DR - ihvertfall les ditta
 
 1. Last ned Quiz-rapport frå Canvas med **Student Analysis Report** (CSV-format)
-2. Lag ei mappe kalla `TicksSheet` og plasser CSV-fila der
+2. Plasser CSV-fila i mappe `TicksSheet`.
 3. Køyr skriptet og oppgi SLT-nummeret
 
 ## Nedlasting frå Canvas
@@ -63,12 +63,9 @@ SLT/
         └── GroupOverview.pdf
 ```
 
-Legg til `SLT/` i `.gitignore` for å unngå å pushe genererte filer.
-
 * `TaskAllocation.pdf` – viser kven som har fått kva oppgåve for alle subgrupper
 * `GroupOverview.pdf` – viser berre medlemmar, kan delast utan å avsløre oppgåver
 * `SLT<nr>.zip` – alle PDF-ane frå alle gruppene, klar til opplasting/deling.
-  Blir laga på nytt for kvar køyring.
 
 ## Krav
 
@@ -135,9 +132,6 @@ Testane vaktar mellom anna at:
 * ingen hamnar i to subgrupper samstundes
 * ingen studentar forsvinn undervegs
 * zipen får med alle PDF-ane, og ikkje seg sjølv
-
-Fordelinga er tilfeldig, so testane køyrer kvar invariant med 25 ulike seed.
-Éin einskild køyring går lett klar av feil som berre slår inn av og til.
 
 Ein eigen CI-jobb feilar om CSV-, Excel- eller PDF-filer blir sjekka inn
 utanfor `tests/fixtures/`, slik at studentdata ikkje hamnar i repoet.
