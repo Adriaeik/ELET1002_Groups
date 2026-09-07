@@ -116,6 +116,32 @@ Ferdig! Grupper lagra i SLT/SLT1/
 Zip med 16 PDF-ar: SLT/SLT1.zip
 ```
 
+## Testar
+
+Regresjonstestane køyrer mot anonymiserte fixturar i `tests/fixtures/` og
+dekkjer begge CSV-formata. Dei køyrer automatisk i GitHub Actions ved push og
+pull request.
+
+```bash
+pip install -r requirements-dev.txt
+pytest tests/ -v
+```
+
+Testane vaktar mellom anna at:
+
+* begge formata blir kjende att, og at gruppa blir lesen frå rett stad
+* **siste forsøk alltid gjeld** - kryssar nokon av og so vekk igjen, tel det siste
+* ingen får ei oppgåve dei ikkje har kryssa av for
+* ingen hamnar i to subgrupper samstundes
+* ingen studentar forsvinn undervegs
+* zipen får med alle PDF-ane, og ikkje seg sjølv
+
+Fordelinga er tilfeldig, so testane køyrer kvar invariant med 25 ulike seed.
+Éin einskild køyring går lett klar av feil som berre slår inn av og til.
+
+Ein eigen CI-jobb feilar om CSV-, Excel- eller PDF-filer blir sjekka inn
+utanfor `tests/fixtures/`, slik at studentdata ikkje hamnar i repoet.
+
 ## Feilsøking
 
 **"Ingen CSV-filer funnet"**

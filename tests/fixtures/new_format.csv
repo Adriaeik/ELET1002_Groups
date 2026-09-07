@@ -1,0 +1,108 @@
+name,id,section,section_id,submitted,attempt,"52541: Are you ready and willing to present Task #1 ?
+Remark: tick ""True"" for yes and ""False"" for no.",1.0,"52542: Are you ready and willing to present Task #2 ?
+Remark: tick ""True"" for yes and ""False"" for no.",1.0.1,"52543: Are you ready and willing to present Task #3 ?
+Remark: tick ""True"" for yes and ""False"" for no.",1.0.2,"52544: Are you ready and willing to present Task #4 ?
+Remark: tick ""True"" for yes and ""False"" for no.",1.0.3,"52545: Are you ready and willing to present Task #5 ?
+Remark: tick ""True"" for yes and ""False"" for no.",1.0.4,"52546: Are you ready and willing to present Task #6 ?
+Remark: tick ""True"" for yes and ""False"" for no.",1.0.5,n correct,n incorrect,score
+Ragnhild Løken,900086,"TET4100-26H, TET4100-26H-9 :: 5 - The Mighty Power Nappers","25760, 44322",2026-09-02 12:37:22 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Hedda Mo,900030,"TET4100-26H, TET4100-26H-5 :: 1 - The Cereal Killers","25760, 44315",2026-09-06 06:02:33 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Eirik Vik,900008,"TET4100-26H-12 :: 8 - We Who Shall Not Be Named, TET4100-26H","44318, 25760",2026-09-07 12:18:36 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Kåre Sjøli,900042,"TET4100-26H-7 :: 3 - Last Minute Legends, TET4100-26H","44320, 25760",2026-08-31 09:53:32 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Hedda Vik,900073,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-07 11:10:45 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Pernille Løken,900067,"TET4100-26H-5 :: 1 - The Cereal Killers, TET4100-26H","44315, 25760",2026-09-04 11:31:35 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Pernille Nystrøm,900058,"TET4100-26H-12 :: 8 - We Who Shall Not Be Named, TET4100-26H","44318, 25760",2026-09-07 05:43:41 UTC,1,True,1.0,True,1.0,True,1.0,,0.0,True,1.0,True,1.0,5,1,5.0
+Torbjørn Aasen,900037,"TET4100-26H-9 :: 5 - The Mighty Power Nappers, TET4100-26H","44322, 25760",2026-09-04 14:05:17 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Håkon Tønnesen,900027,"TET4100-26H-9 :: 5 - The Mighty Power Nappers, TET4100-26H","44322, 25760",2026-09-04 14:20:42 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Dagfinn Grønvold,900052,TET4100-26H,25760,2026-09-07 07:42:28 UTC,2,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Øystein Haugen,900028,"TET4100-26H-11 :: 7 - Procrastinators United, TET4100-26H","44317, 25760",2026-09-02 12:34:26 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Linnea Dahlström,900080,"TET4100-26H-5 :: 1 - The Cereal Killers, TET4100-26H","44315, 25760",2026-09-07 09:51:46 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Nora Berge,900045,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-07 11:28:42 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Dagfinn Grønvold,900052,TET4100-26H,25760,2026-09-02 13:33:00 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Tuva Sjøli,900065,"TET4100-26H, TET4100-26H-11 :: 7 - Procrastinators United","25760, 44317",2026-09-06 20:55:10 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Nora Tvedt,900077,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-07 11:11:06 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Åsmund Nøkleby,900049,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-06 20:37:14 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Håkon Nøkleby,900070,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-06 17:57:13 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Ingrid Eng,900032,"TET4100-26H, TET4100-26H-7 :: 3 - Last Minute Legends","25760, 44320",2026-09-05 14:03:17 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Frøya Tvedt,900035,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-05 15:43:49 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Torbjørn Jøssang,900060,"TET4100-26H-11 :: 7 - Procrastinators United, TET4100-26H","44317, 25760",2026-09-07 11:24:44 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Hedda Berge,900001,"TET4100-26H-11 :: 7 - Procrastinators United, TET4100-26H","44317, 25760",2026-09-07 11:24:49 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Æsa Rønning,900005,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-07 10:28:58 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Øystein Løken,900078,"TET4100-26H-5 :: 1 - The Cereal Killers, TET4100-26H","44315, 25760",2026-09-07 10:50:27 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Sølvi Vik,900090,"TET4100-26H, TET4100-26H-6 :: 2 - Coffee Zombies","25760, 44319",2026-09-07 11:01:28 UTC,3,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Sindre Sjøli,900038,"TET4100-26H, TET4100-26H-9 :: 5 - The Mighty Power Nappers","25760, 44322",2026-09-07 08:59:49 UTC,4,True,1.0,True,1.0,False,0.0,False,0.0,False,0.0,False,0.0,2,4,2.0
+Wenche Ulvestad,900041,"TET4100-26H-11 :: 7 - Procrastinators United, TET4100-26H","44317, 25760",2026-09-07 10:12:07 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Magnus Mo,900011,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-07 12:40:45 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Gunnar Opsahl,900039,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-07 13:04:23 UTC,2,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Pernille Nystrøm,900058,"TET4100-26H-12 :: 8 - We Who Shall Not Be Named, TET4100-26H","44318, 25760",2026-09-07 05:44:11 UTC,2,True,1.0,True,1.0,True,1.0,False,0.0,True,1.0,True,1.0,5,1,5.0
+Sølvi Vik,900090,"TET4100-26H, TET4100-26H-6 :: 2 - Coffee Zombies","25760, 44319",2026-09-06 20:33:59 UTC,2,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Hedda Nøkleby,900051,"TET4100-26H-12 :: 8 - We Who Shall Not Be Named, TET4100-26H","44318, 25760",2026-09-06 17:18:39 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Sølvi Hæg,900087,"TET4100-26H-12 :: 8 - We Who Shall Not Be Named, TET4100-26H","44318, 25760",2026-09-07 12:16:53 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Åsmund Sæther,900064,"TET4100-26H, TET4100-26H-11 :: 7 - Procrastinators United","25760, 44317",2026-09-07 11:52:56 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Sindre Sjøli,900038,"TET4100-26H, TET4100-26H-9 :: 5 - The Mighty Power Nappers","25760, 44322",2026-09-07 08:56:09 UTC,2,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,False,0.0,3,3,3.0
+Vebjørn Nøkleby,900053,"TET4100-26H, TET4100-26H-12 :: 8 - We Who Shall Not Be Named","25760, 44318",2026-09-06 23:28:10 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Ola Kvam,900022,"TET4100-26H, TET4100-26H-7 :: 3 - Last Minute Legends","25760, 44320",2026-09-03 10:00:03 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Frøya Mo,900003,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-02 09:56:03 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Sølvi Kvam,900059,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-07 06:46:37 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Ulrik Vik,900082,"TET4100-26H-12 :: 8 - We Who Shall Not Be Named, TET4100-26H","44318, 25760",2026-09-07 07:43:31 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Ådne Hæg,900023,"TET4100-26H-7 :: 3 - Last Minute Legends, TET4100-26H","44320, 25760",2026-09-06 16:39:48 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Ola Jøssang,900002,"TET4100-26H, TET4100-26H-12 :: 8 - We Who Shall Not Be Named","25760, 44318",2026-09-07 12:09:00 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Øystein Grønvold,900020,"TET4100-26H-7 :: 3 - Last Minute Legends, TET4100-26H","44320, 25760",2026-09-07 11:13:54 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Åsmund Aasen,900075,"TET4100-26H-5 :: 1 - The Cereal Killers, TET4100-26H","44315, 25760",2026-09-04 11:01:43 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Vebjørn Grønvold,900074,"TET4100-26H-9 :: 5 - The Mighty Power Nappers, TET4100-26H","44322, 25760",2026-09-07 05:42:08 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Magnus Berge,900034,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-06 19:30:34 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Gunnar Opsahl,900039,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-07 12:20:02 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,,0.0,4,2,4.0
+Wenche Haugen,900056,"TET4100-26H-9 :: 5 - The Mighty Power Nappers, TET4100-26H","44322, 25760",2026-09-04 13:49:54 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Hedda Løken,900021,"TET4100-26H-11 :: 7 - Procrastinators United, TET4100-26H","44317, 25760",2026-09-07 10:18:15 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Ragnhild Iversen,900066,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-07 09:17:10 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Vebjørn Nystrøm,900031,"TET4100-26H, TET4100-26H-6 :: 2 - Coffee Zombies","25760, 44319",2026-09-02 16:46:06 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Kåre Aasen,900072,"TET4100-26H-5 :: 1 - The Cereal Killers, TET4100-26H","44315, 25760",2026-09-07 12:03:25 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Æsa Fjell,900033,"TET4100-26H-5 :: 1 - The Cereal Killers, TET4100-26H","44315, 25760",2026-08-31 16:44:30 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Håkon Sjøli,900061,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-07 10:11:57 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Bjørn Kvam,900085,"TET4100-26H-12 :: 8 - We Who Shall Not Be Named, TET4100-26H","44318, 25760",2026-09-06 23:25:42 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Ulrik Nystrøm,900006,"TET4100-26H-7 :: 3 - Last Minute Legends, TET4100-26H","44320, 25760",2026-09-07 12:08:42 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Nora Bøe,900084,"TET4100-26H, TET4100-26H-9 :: 5 - The Mighty Power Nappers","25760, 44322",2026-09-07 12:56:20 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Torbjørn Åmot,900007,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-06 21:39:51 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Pernille Rønning,900025,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-04 07:46:19 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Sindre Sjøli,900038,"TET4100-26H, TET4100-26H-9 :: 5 - The Mighty Power Nappers","25760, 44322",2026-09-07 08:55:33 UTC,1,True,1.0,True,1.0,True,1.0,,0.0,,0.0,,0.0,3,3,3.0
+Sølvi Ulvestad,900000,"TET4100-26H, TET4100-26H-8 :: 4 - Grade Diggers","25760, 44321",2026-09-07 12:12:53 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Tuva Nøkleby,900048,"TET4100-26H-12 :: 8 - We Who Shall Not Be Named, TET4100-26H","44318, 25760",2026-09-04 10:53:45 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Ola Berge,900046,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-07 12:57:37 UTC,1,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,False,0.0,3,3,3.0
+Ragnhild Nøkleby,900047,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-02 12:09:07 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Vebjørn Ulvestad,900079,"TET4100-26H, TET4100-26H-5 :: 1 - The Cereal Killers","25760, 44315",2026-09-07 11:36:30 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Sindre Sjøli,900038,"TET4100-26H, TET4100-26H-9 :: 5 - The Mighty Power Nappers","25760, 44322",2026-09-07 08:59:16 UTC,3,True,1.0,True,1.0,False,0.0,False,0.0,False,0.0,False,0.0,2,4,2.0
+Ragnhild Eng,900054,"TET4100-26H-12 :: 8 - We Who Shall Not Be Named, TET4100-26H","44318, 25760",2026-09-06 11:57:44 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Sindre Tønnesen,900089,"TET4100-26H-5 :: 1 - The Cereal Killers, TET4100-26H","44315, 25760",2026-09-07 12:46:43 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Sindre Haugen,900018,"TET4100-26H, TET4100-26H-9 :: 5 - The Mighty Power Nappers","25760, 44322",2026-09-06 22:25:01 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Ragnhild Mo,900081,"TET4100-26H-9 :: 5 - The Mighty Power Nappers, TET4100-26H","44322, 25760",2026-09-07 13:14:49 UTC,1,True,1.0,True,1.0,False,0.0,True,1.0,False,0.0,False,0.0,3,3,3.0
+Linnea Rørvik,900015,"TET4100-26H-5 :: 1 - The Cereal Killers, TET4100-26H","44315, 25760",2026-09-02 18:29:02 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Ragnhild Bøe,900088,"TET4100-26H-7 :: 3 - Last Minute Legends, TET4100-26H","44320, 25760",2026-09-07 00:08:00 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Åsmund Sjøli,900068,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-07 12:12:23 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Ådne Tvedt,900069,"TET4100-26H-11 :: 7 - Procrastinators United, TET4100-26H","44317, 25760",2026-09-06 22:01:29 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Æsa Haugen,900004,"TET4100-26H-7 :: 3 - Last Minute Legends, TET4100-26H","44320, 25760",2026-09-06 21:36:13 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Nora Bakke,900016,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-07 12:53:06 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Sølvi Vik,900090,"TET4100-26H, TET4100-26H-6 :: 2 - Coffee Zombies","25760, 44319",2026-09-02 12:06:47 UTC,1,,0.0,,0.0,,0.0,,0.0,,0.0,,0.0,0,6,0.0
+Åsmund Solheim,900009,"TET4100-26H, TET4100-26H-11 :: 7 - Procrastinators United","25760, 44317",2026-09-07 12:22:17 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Magnus Berge,900034,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-06 19:31:01 UTC,2,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Øystein Dahlström,900013,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-04 11:10:12 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Ragnhild Tønnesen,900026,"TET4100-26H-5 :: 1 - The Cereal Killers, TET4100-26H","44315, 25760",2026-09-07 12:20:16 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Torbjørn Ulvestad,900055,"TET4100-26H, TET4100-26H-11 :: 7 - Procrastinators United","25760, 44317",2026-09-07 11:39:50 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Dagfinn Nystrøm,900063,"TET4100-26H-9 :: 5 - The Mighty Power Nappers, TET4100-26H","44322, 25760",2026-09-07 11:44:31 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Øystein Rørvik,900017,"TET4100-26H, TET4100-26H-7 :: 3 - Last Minute Legends","25760, 44320",2026-09-07 12:31:28 UTC,1,True,1.0,True,1.0,False,0.0,False,0.0,False,0.0,False,0.0,2,4,2.0
+Hedda Aasen,900044,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-07 12:18:28 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Hedda Nystrøm,900024,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-07 12:15:49 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Ådne Aasen,900012,"TET4100-26H-7 :: 3 - Last Minute Legends, TET4100-26H","44320, 25760",2026-09-07 08:48:16 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Ola Sæther,900040,"TET4100-26H, TET4100-26H-10 :: 6 - The Deadline Destroyers","25760, 44316",2026-09-07 12:03:46 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Nora Ødegård,900057,"TET4100-26H, TET4100-26H-8 :: 4 - Grade Diggers","25760, 44321",2026-09-07 12:54:07 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Pernille Ulvestad,900029,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-06 17:51:30 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Æsa Nøkleby,900083,"TET4100-26H-11 :: 7 - Procrastinators United, TET4100-26H","44317, 25760",2026-09-06 12:08:47 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,5,1,5.0
+Nora Berge,900045,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-07 13:12:36 UTC,2,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Yngve Løken,900076,"TET4100-26H-9 :: 5 - The Mighty Power Nappers, TET4100-26H","44322, 25760",2026-09-07 12:19:35 UTC,1,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,False,0.0,3,3,3.0
+Bjørn Sæther,900062,"TET4100-26H-10 :: 6 - The Deadline Destroyers, TET4100-26H","44316, 25760",2026-09-06 21:21:07 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Tuva Rønning,900014,"TET4100-26H, TET4100-26H-7 :: 3 - Last Minute Legends","25760, 44320",2026-09-06 05:10:06 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Yngve Rønning,900071,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-07 12:54:57 UTC,1,True,1.0,True,1.0,False,0.0,False,0.0,False,0.0,False,0.0,2,4,2.0
+Jørgen Kvam,900036,"TET4100-26H, TET4100-26H-12 :: 8 - We Who Shall Not Be Named","25760, 44318",2026-09-06 14:37:32 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,False,0.0,False,0.0,4,2,4.0
+Dagfinn Sjøli,900010,"TET4100-26H-6 :: 2 - Coffee Zombies, TET4100-26H","44319, 25760",2026-09-07 12:44:42 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,,0.0,5,1,5.0
+Ådne Solheim,900050,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-06 17:27:26 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Wenche Nystrøm,900043,"TET4100-26H-11 :: 7 - Procrastinators United, TET4100-26H","44317, 25760",2026-09-07 12:24:09 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0
+Dagfinn Sæther,900019,"TET4100-26H-8 :: 4 - Grade Diggers, TET4100-26H","44321, 25760",2026-09-07 11:06:05 UTC,1,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,True,1.0,6,0,6.0

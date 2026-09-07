@@ -1,0 +1,64 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Installer avhengigheiter
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Køyr regresjonstestar
+        run: pytest tests/ -v
+
+  personvern:
+    # Studentdata skal aldri sjekkast inn. Testfixturane er anonymiserte og
+    # er dei einaste CSV-ane som får liggje i repoet.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ingen studentdata i repoet
+        run: |
+          funn=$(git ls-files '*.csv' '*.xlsx' '*.xls' '*.pdf' \
+                 | grep -v '^tests/fixtures/' || true)
+          if [ -n "$funn" ]; then
+            echo "::error::Datafiler utanfor tests/fixtures/ er sjekka inn:"
+            echo "$funn"
+            exit 1
+          fi
+          echo "OK - ingen datafiler utanfor tests/fixtures/"
+
+      - name: Fixturane har syntetiske id-ar
+        run: |
+          python - <<'EOF'
+          import csv, glob, sys
+          feil = False
+          for path in glob.glob("tests/fixtures/*.csv"):
+              with open(path, encoding="utf-8-sig", newline="") as fh:
+                  for rad in csv.DictReader(fh):
+                      if int(rad["id"]) < 900000:
+                          print(f"::error::{path}: id {rad['id']} ser ekte ut")
+                          feil = True
+                          break
+          sys.exit(1 if feil else 0)
+          EOF
