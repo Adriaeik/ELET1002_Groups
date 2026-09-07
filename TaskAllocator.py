@@ -63,9 +63,13 @@ def load_data(file_path):
     """Last inn data og behald berre siste forsøk per student"""
     data = pd.read_csv(file_path, sep=",", encoding="utf-8-sig")
     
-    # Sorter etter attempt (fallande) og behald høgaste attempt per student
+    # Canvas eksporterer éi rad per forsøk. Utan dedup tel gamle, overskrivne
+    # svar med i fordelinga - ein student som kryssa av og so kryssa vekk igjen
+    # blir framleis rekna som villig, og kan bli plukka éin gong per forsøk.
+    # Dedup på (name, id) og ikkje berre id: skulle Canvas gjenbruke ein id på
+    # to ulike studentar, overlever begge.
     data = data.sort_values('attempt', ascending=False)
-    # data = data.drop_duplicates(subset=['id'], keep='first')
+    data = data.drop_duplicates(subset=['name', 'id'], keep='first')
     
     return data
 
@@ -206,10 +210,13 @@ def distribute_tasks(data, answers, num_subgroups):
                 selected = eligible_candidates.pop(0)
                 subgroups[subgroup_id]["tasks"].setdefault(task_num, selected)
                 
-                # Fjern denne personen frå alle andre oppgåver
+                # Fjern denne personen frå alle andre oppgåver.
+                # list.remove() fjernar berre første treff, so vi filtrerer i
+                # staden - elles kan same person bli plukka fleire gonger.
                 for other_task in answers.keys():
-                    if selected in task_candidates[other_task]:
-                        task_candidates[other_task].remove(selected)
+                    task_candidates[other_task] = [
+                        c for c in task_candidates[other_task] if c != selected
+                    ]
     
     # Finn personar som allereie er tildelt oppgåver
     assigned_names = [name for sg in subgroups.values() for name in sg["tasks"].values()]
@@ -231,10 +238,16 @@ def distribute_tasks(data, answers, num_subgroups):
     for task_num, col in answers.items():
         for subgroup_id in sorted(subgroups.keys(), key=lambda x: len(subgroups[x]["tasks"])):
             if task_num not in subgroups[subgroup_id]["tasks"]:
-                all_members = list(subgroups[subgroup_id]["tasks"].values()) + subgroups[subgroup_id]["members"]
+                opptekne = set(subgroups[subgroup_id]["tasks"].values())
+                all_members = list(opptekne) + subgroups[subgroup_id]["members"]
                 eligible_members = [m for m in all_members if is_willing(data, m, col)]
-                if eligible_members:
-                    selected = random.choice(eligible_members)
+                # Prioriter dei som ikkje alt har ei oppgåve. Berre om ingen
+                # ledig har kryssa av, doblar vi opp på nokon - betre det enn
+                # at oppgåva står utan presentatør.
+                ledige = [m for m in eligible_members if m not in opptekne]
+                kandidatar = ledige or eligible_members
+                if kandidatar:
+                    selected = random.choice(kandidatar)
                     subgroups[subgroup_id]["tasks"].setdefault(task_num, selected)
     
     return subgroups
